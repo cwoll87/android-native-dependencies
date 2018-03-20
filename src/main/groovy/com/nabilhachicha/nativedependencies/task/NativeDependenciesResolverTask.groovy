@@ -32,7 +32,7 @@ class NativeDependenciesResolverTask extends DefaultTask {
     def @Input
             dependencies
     def @OutputDirectory
-            jniLibs = project.android.sourceSets.main.jniLibs.srcDirs.first()
+            jniLibs = "${project.buildDir}/androidTempNativeDependencies"
 
     final String X86_FILTER = "x86"
     final String X86_64_FILTER = "x86_64"
@@ -163,5 +163,7 @@ class NativeDependenciesResolverTask extends DefaultTask {
                 }
             }
         }
+
+        project.android.sourceSets.main.jniLibs.srcDirs += jniLibs
     }
 }
